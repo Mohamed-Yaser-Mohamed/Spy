@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /Spy/
+  
+  # If it's the root directory (i.e. localhost/Spy/), load the compiled output
+  RewriteRule ^$ dist/index.html [L]
+  
+  # For any other route, if the file doesn't exist, hand it to the React router in dist/index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ dist/index.html [QSA,L]
+</IfModule>
